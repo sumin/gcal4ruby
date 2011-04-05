@@ -12,6 +12,6 @@ Gem::Specification.new do |s|
    s.has_rdoc = true
    s.test_files = ['test/unit.rb'] 
    s.add_dependency('gdata4ruby', '>= 0.1.2')
-   s.add_dependency('active_support', '>= 2.3.5')
+   s.add_dependency('activesupport', '~> 2.3')
    s.add_dependency('tzinfo', '>= 0.3.22')
 end 
