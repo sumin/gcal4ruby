@@ -283,7 +283,7 @@ module GCal4Ruby
   end
 
 #protected
-  def parse_term(term)
+  def self.parse_term(term)
     parts = term.split ';'
     head = parts.shift unless parts.first.include? '='
     tail = Hash[*parts.map {|part| (part.split('=') + [nil])[0..1] }.flatten]
