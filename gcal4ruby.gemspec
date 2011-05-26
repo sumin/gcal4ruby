@@ -14,6 +14,6 @@ Gem::Specification.new do |s|
    s.add_dependency('gdata4ruby', '>= 0.1.2')
 #   s.add_dependency('activesupport', '~> 2.3')  #cordawyn
 #   s.add_dependency('activesupport', '>=2.3.5')  #old
-   s.add_dependency('activesupprt', '3.0.7')  #my try
+   s.add_dependency('activesupport', '3.0.7')  #my try
    s.add_dependency('tzinfo', '>= 0.3.22')
 end 
