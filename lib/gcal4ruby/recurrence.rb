@@ -281,7 +281,7 @@ module GCal4Ruby
       end
     end
 
-    def self.parse_term(term)
+    def parse_term(term)
       parts = term.split ';'
       head = parts.shift unless parts.first.include? '='
       tail = Hash[*parts.map {|part| (part.split('=') + [nil])[0..1] }.flatten]
@@ -297,7 +297,7 @@ module GCal4Ruby
 ##################
 #i suspect this section was misplaced! should have gone up there ^ in the class where it can be used!
 protected
-  def self.parse_term(term)
+  def parse_term(term)
     parts = term.split ';'
     head = parts.shift unless parts.first.include? '='
     tail = Hash[*parts.map {|part| (part.split('=') + [nil])[0..1] }.flatten]
