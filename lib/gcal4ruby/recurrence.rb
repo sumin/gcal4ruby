@@ -282,7 +282,8 @@ module GCal4Ruby
     end
   end
 
-protected
+#protected
+private
   def parse_term(term)
     parts = term.split ';'
     head = parts.shift unless parts.first.include? '='
