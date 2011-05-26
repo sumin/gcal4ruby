@@ -280,9 +280,23 @@ module GCal4Ruby
         raise RecurrenceValueError, "Frequency must be a hash (see documentation)"
       end
     end
+
+    def self.parse_term(term)
+      parts = term.split ';'
+      head = parts.shift unless parts.first.include? '='
+      tail = Hash[*parts.map {|part| (part.split('=') + [nil])[0..1] }.flatten]
+      [head, tail]
+    end
+
+    def time_builder(zone)
+      zone && ActiveSupport::TimeZone[zone] || Time
+    end
+
   end
 
-#protected
+##################
+#i suspect this section was misplaced! should have gone up there ^ in the class where it can be used!
+protected
   def self.parse_term(term)
     parts = term.split ';'
     head = parts.shift unless parts.first.include? '='
@@ -293,4 +307,6 @@ module GCal4Ruby
   def time_builder(zone)
     zone && ActiveSupport::TimeZone[zone] || Time
   end
+##################
+
 end
