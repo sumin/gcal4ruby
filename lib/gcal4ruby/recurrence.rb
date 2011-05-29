@@ -40,6 +40,8 @@ module GCal4Ruby
     attr_reader :event
     #The date until which the event will be repeated
     attr_reader :repeat_until
+    #The number of times to repeat the event
+    attr_reader :count
     #The event frequency
     attr_reader :frequency
     #True if the event is all day (i.e. no start/end time)
@@ -99,6 +101,7 @@ module GCal4Ruby
               freq = freq && freq.downcase.capitalize
               int = value_props["INTERVAL"]
               @repeat_until = Time.parse(value_props['UNTIL']) if value_props.has_key?('UNTIL')
+              @count = Integer(value_props['COUNT']) if value_props.has_key?('COUNT')
               by = %w(BYDAY BYMONTHDAY BYYEARDAY).inject([]) do |acum, by_key|
                 acum += value_props[by_key].split(',') if value_props.has_key?(by_key)
                 acum
@@ -244,7 +247,15 @@ module GCal4Ruby
         @repeat_until = r
       end
     end
-    
+  
+    def count=(c)
+      if not c.is_a?(Fixnum)
+        raise RecurrenceValueError, "Count must be an integer"
+      else
+        @count = r
+      end
+    end
+  
     #Sets the frequency of the recurrence.  Should be a hash with one of 
     #"SECONDLY", "MINUTELY", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "YEARLY" as the key,
     #and as the value, an array containing zero to n of the following:
@@ -281,6 +292,7 @@ module GCal4Ruby
       end
     end
 
+protected
     def parse_term(term)
       parts = term.split ';'
       head = parts.shift unless parts.first.include? '='
@@ -296,17 +308,17 @@ module GCal4Ruby
 
 ##################
 #i suspect this section was misplaced! should have gone up there ^ in the class where it can be used!
-protected
-  def parse_term(term)
-    parts = term.split ';'
-    head = parts.shift unless parts.first.include? '='
-    tail = Hash[*parts.map {|part| (part.split('=') + [nil])[0..1] }.flatten]
-    [head, tail]
-  end
-
-  def time_builder(zone)
-    zone && ActiveSupport::TimeZone[zone] || Time
-  end
+#protected
+#  def parse_term(term)
+#    parts = term.split ';'
+#    head = parts.shift unless parts.first.include? '='
+#    tail = Hash[*parts.map {|part| (part.split('=') + [nil])[0..1] }.flatten]
+#    [head, tail]
+#  end
+#
+#  def time_builder(zone)
+#    zone && ActiveSupport::TimeZone[zone] || Time
+#  end
 ##################
 
 end
