@@ -253,7 +253,7 @@ module GCal4Ruby
       if not c.is_a?(Fixnum)
         raise RecurrenceValueError, "Count must be an integer"
       else
-        @count = r
+        @count = c
       end
     end
   
@@ -307,19 +307,19 @@ protected
 
   end
 
-##################
+=begin
 #i suspect this section was misplaced! should have gone up there ^ in the class where it can be used!
-#protected
-#  def parse_term(term)
-#    parts = term.split ';'
-#    head = parts.shift unless parts.first.include? '='
-#    tail = Hash[*parts.map {|part| (part.split('=') + [nil])[0..1] }.flatten]
-#    [head, tail]
-#  end
-#
-#  def time_builder(zone)
-#    zone && ActiveSupport::TimeZone[zone] || Time
-#  end
-##################
+protected
+  def parse_term(term)
+    parts = term.split ';'
+    head = parts.shift unless parts.first.include? '='
+    tail = Hash[*parts.map {|part| (part.split('=') + [nil])[0..1] }.flatten]
+    [head, tail]
+  end
+
+  def time_builder(zone)
+    zone && ActiveSupport::TimeZone[zone] || Time
+  end
+=end
 
 end
