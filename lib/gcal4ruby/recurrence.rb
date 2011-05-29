@@ -108,7 +108,7 @@ module GCal4Ruby
               end
               
               @frequency = {freq => by}
-              @frequency.merge!({'interval' => int.to_i}) if int
+              @frequency.merge!({'interval' => int.to_i}) #if int
             end
         end
       end

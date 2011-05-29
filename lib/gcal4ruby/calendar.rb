@@ -116,7 +116,7 @@ module GCal4Ruby
       ret = @service.send_request(GData4Ruby::Request.new(:get, @content_uri))
       REXML::Document.new(ret.body).root.elements.each("entry"){}.map do |entry|
         entry = GData4Ruby::Utils.add_namespaces(entry)
-        e = Event.new(service)
+        e = Event.new(service,{:calendar => self})
         if e.load(entry.to_s)
           events << e
         end
