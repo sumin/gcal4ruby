@@ -57,7 +57,6 @@ module GCal4Ruby
         self.load(vars)
       end
       @all_day ||= false
-      @interval ||= 1
     end
     
     #Accepts a string containing a properly formatted ISO 8601 recurrence rule and loads it into the recurrence object
@@ -100,7 +99,7 @@ module GCal4Ruby
             if scope.empty?
               freq = value_props["FREQ"]
               freq = freq && freq.downcase.capitalize
-              int = value_props["INTERVAL"]
+              int = value_props["INTERVAL"] ? value_props["INTERVAL"] : 1
               @repeat_until = Time.parse(value_props['UNTIL']) if value_props.has_key?('UNTIL')
               @count = Integer(value_props['COUNT']) if value_props.has_key?('COUNT')
               by = %w(BYDAY BYMONTHDAY BYYEARDAY).inject([]) do |acum, by_key|
