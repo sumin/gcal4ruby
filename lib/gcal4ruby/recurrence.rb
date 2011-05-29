@@ -57,6 +57,7 @@ module GCal4Ruby
         self.load(vars)
       end
       @all_day ||= false
+      @interval ||= 1
     end
     
     #Accepts a string containing a properly formatted ISO 8601 recurrence rule and loads it into the recurrence object
