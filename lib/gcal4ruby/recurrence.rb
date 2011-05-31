@@ -68,6 +68,8 @@ module GCal4Ruby
       scope = []
 
       attrs.each do |val|
+        next if not val.include? ':' # some recurrence rules had a line without a ':' causing a nilpointerexception.
+                                     #needs testing TODO
         key, value = val.split(':')
 
         key, key_props = parse_term(key)

@@ -113,10 +113,10 @@ module GCal4Ruby
     #Returns an array of Event objects corresponding to each event in the calendar.
     def events
       events = []
-      ret = @service.send_request(GData4Ruby::Request.new(:get, @content_uri))
+      ret = @service.send_request(GData4Ruby::Request.new(:get, @content_uri,nil,nil,{'max-results' => '99999'}))
       REXML::Document.new(ret.body).root.elements.each("entry"){}.map do |entry|
         entry = GData4Ruby::Utils.add_namespaces(entry)
-        e = Event.new(service) #,{:calendar => self})
+        e = Event.new(service,{:calendar => self})
         if e.load(entry.to_s)
           events << e
         end
