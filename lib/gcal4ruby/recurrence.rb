@@ -113,7 +113,9 @@ module GCal4Ruby
         end
       end
     end
-    
+
+    # Note: to_s is somewhat out of date.
+    # r4bidbunnye added some functionality but did not update to_s
     def to_s
       output = ''
       if @frequency
